@@ -1,5 +1,7 @@
 var AWS = require('aws-sdk');
 
+const uuidv1 = require('uuid/v1');
+
 const dbClient = new AWS.DynamoDB.DocumentClient({region:'ap-southeast-1'});
 
 exports.handler = async (event) => {
@@ -10,9 +12,10 @@ exports.handler = async (event) => {
     var params = {
         TableName: 'Item_table',
         Item:{
-            'id': "123",
+            'id': uuidv1(),
             'key': payload.key,
-            'value': payload.value
+            'value': payload.value,
+            "timestamp": Date.now()
         }
     };
     
