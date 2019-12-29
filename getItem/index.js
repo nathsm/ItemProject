@@ -7,9 +7,9 @@ exports.handler = async (event) => {
     var params = {
         TableName: 'Item_table',
         Key:{
-            'id': "123",
+            'id': event.queryStringParameters.id
         }
-    }
+    };
     
     
     return new Promise((resolve, reject) =>{
@@ -18,9 +18,9 @@ exports.handler = async (event) => {
                 reject(err);
             }
             else{
-                return resolve({statusCode: 200, body:data});
+                return resolve({statusCode: 200, body: JSON.stringify(data)});
             }
-        })
+        });
     });
 };
 
